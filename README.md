@@ -62,6 +62,18 @@ Funnel Attrition Rate (%) =
 
 ---
 
+## 🛠️ Corporate Data Architecture & Backend Extraction Logic
+To transform raw customer transactional telemetry into structured executive insights, a custom data-cleaning and cohort-segmentation pipeline was executed via SQL. Instead of relying on flat aggregate counts, the database was queried to track conditional purchasing funnels dynamically.
+
+* 📄 **Production SQL Script:** [`churn_analysis_pipeline.sql`](./churn_analysis_pipeline.sql)
+
+=========
+
+### Executive Analytical Approach:
+1. **Willingness-to-Pay (WTP) Segmentation:** Programmatically converted raw text string variables (`c4`) into precision numeric types (`CAST AS REAL`) to establish strict consumer price-sensitivity boundaries ($0-30$, $31-70$, $>70\text{ INR}$).
+2. **Granular Funnel Aggregation:** Used conditional `SUM(CASE WHEN...)` rules to separate binary transactional success parameters (`c6`) from absolute baseline session volume.
+3. **Strategic Business Sorting:** Prioritized reporting rows by highest leakage velocity (`ORDER BY funnel_attrition_rate DESC`) to instantly highlight high-risk sectors requiring immediate revenue guardrails.
+
 # 🔍 Critical Business Insights
 
 ### 1️⃣ Price Elasticity Breach
