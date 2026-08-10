@@ -1,9 +1,13 @@
 import pandas as pd
 import numpy as np
 from scipy.stats import norm
+from pathlib import Path
+
+# Project root directory
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load baseline dataset
-df = pd.read_csv("../gurugram_churn_data.csv")
+df = pd.read_csv(BASE_DIR / "gurugram_churn_data.csv")
 
 # Reproducible random assignment
 np.random.seed(42)
@@ -66,5 +70,7 @@ else:
     print("Result: Not Statistically Significant")
     print("Recommendation: Do not roll out yet.")
 
-# Save experiment dataset
-df.to_csv("../ab_test_data.csv", index=False)
+# Save experiment dataset in project root
+df.to_csv(BASE_DIR / "ab_test_data.csv", index=False)
+
+print("\nExperiment dataset saved as: ab_test_data.csv")
