@@ -3,7 +3,7 @@ import numpy as np
 from scipy.stats import norm
 from pathlib import Path
 
-# Project root directory
+# Find project root directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load baseline dataset
@@ -43,8 +43,9 @@ pooled_rate = (control_success + treatment_success) / (
 )
 
 standard_error = np.sqrt(
-    pooled_rate * (1 - pooled_rate) *
-    (1 / control_total + 1 / treatment_total)
+    pooled_rate
+    * (1 - pooled_rate)
+    * (1 / control_total + 1 / treatment_total)
 )
 
 z_stat = (treatment_rate - control_rate) / standard_error
@@ -54,6 +55,7 @@ p_value = 2 * (1 - norm.cdf(abs(z_stat)))
 absolute_lift = treatment_rate - control_rate
 relative_lift = absolute_lift / control_rate
 
+# Display results
 print("A/B TEST RESULTS")
 print("----------------")
 print(f"Control Conversion Rate: {control_rate:.1%}")
@@ -70,7 +72,7 @@ else:
     print("Result: Not Statistically Significant")
     print("Recommendation: Do not roll out yet.")
 
-# Save experiment dataset in project root
+# Save experiment dataset
 df.to_csv(BASE_DIR / "ab_test_data.csv", index=False)
 
-print("\nExperiment dataset saved as: ab_test_data.csv")
+print("Experiment dataset saved as: ab_test_data.csv")
