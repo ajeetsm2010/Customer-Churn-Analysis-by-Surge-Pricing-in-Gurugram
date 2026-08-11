@@ -21,9 +21,11 @@ The primary objective was to identify structural revenue leakage during peak-dem
 | Technology | Purpose |
 |------------|----------|
 | **SQL (SQLite)** | Transaction-level data extraction, funnel segmentation, and behavioral mapping |
-| **Python (Pandas)** | Data cleaning, transformation, exploratory analysis, and anomaly detection |
+| Python (Pandas, NumPy, SciPy) | Data cleaning, transformation, statistical analysis, and A/B testing |
 | **Power BI Desktop** | Executive-facing dashboard development and KPI visualization |
 | **DAX** | Churn-rate calculations and analytical metric generation |
+| A/B Testing | Controlled experiment design, conversion analysis, and lift measurement |
+| Statistical Hypothesis Testing | Two-proportion Z-test and statistical significance evaluation |
 | **Generative AI (ChatGPT)** | Workflow acceleration, documentation refinement, and insight validation |
 
 ---
@@ -53,6 +55,39 @@ To isolate behavioral drop-off patterns, the transactional dataset was mapped in
 Funnel Attrition Rate (%) =
 (Total Dropped Users ÷ Total Checkout Attempts) × 100
 ```
+
+# 🧪 A/B Testing & Experimentation
+
+To evaluate whether a capped-surge pricing strategy could improve checkout conversion, a simulated controlled A/B experiment was conducted using 10,000 checkout sessions.
+
+### Experiment Design
+
+| Group | Strategy | Users | Conversion Rate |
+|---|---|---:|---:|
+| Control | Existing high-surge pricing | 5,000 | 35.0% |
+| Treatment | Capped-surge pricing strategy | 5,000 | 49.2% |
+
+### Statistical Analysis
+
+A two-proportion Z-test was implemented in Python to evaluate whether the observed conversion difference was statistically significant.
+
+**Results:**
+
+- Control Conversion Rate: **35.0%**
+- Treatment Conversion Rate: **49.2%**
+- Absolute Conversion Lift: **14.2 percentage points**
+- Relative Conversion Lift: **40.6%**
+- Z-Statistic: **14.38**
+- Statistical Significance: **p < 0.001**
+
+The treatment group demonstrated a statistically significant improvement in checkout conversion compared with the control group.
+
+### Business Recommendation
+
+The analysis supports further controlled rollout testing of the capped-surge strategy, while monitoring revenue, customer retention, and unit economics before full-scale implementation.
+
+> **Note:** The A/B experiment uses simulated treatment outcomes for analytical demonstration and does not represent a production experiment conducted on real platform users.
+
 
 ### Analytical Implementation
 - Segmented raw transactional parameters into surge-pricing cohorts
